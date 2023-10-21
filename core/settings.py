@@ -1,4 +1,10 @@
 from pathlib import Path
+import environ
+
+
+env = environ.Env()
+env.read_env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -7,12 +13,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-69ha4#@1nj=7v1wh1jvnsft=ku09s8o_s$e*9l0ggsz2adf(b_'
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,7 +45,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'core.urls'
-
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR.joinpath("staticfiles")
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
